@@ -1,0 +1,213 @@
+/* Clean version — no viewport toolbar. Soft theme toggle included. */
+:root{
+  --bg:#0f1115;
+  --panel:#16181d;
+  --text:#e6e8ee;
+  --muted:#a8acb7;
+  --line:#2a2f3a;
+  --accent:#eaeefb;
+  --radius:14px;
+  --maxw:980px;
+  --glow-outer: 0 0 30px rgba(255,255,255,.12);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font:16px/1.6 system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 10% -10%, rgba(255,255,255,.06), transparent 60%),
+    radial-gradient(800px 400px at 90% -15%, rgba(255,255,255,.04), transparent 60%),
+    var(--bg);
+  transition: background-color .25s ease, color .25s ease;
+  overflow-x:hidden;
+}
+
+/* Floating theme button */
+.floating-btn{
+  position:fixed; top:14px; right:14px;
+  z-index:1000;
+  padding:8px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.16);
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  color:var(--text);
+  cursor:pointer;
+  box-shadow: var(--glow-outer);
+}
+
+/* Header */
+.site-header{ max-width:var(--maxw); margin:56px auto 8px; padding:0 20px }
+.title-wrap{
+  display:flex; align-items:center; gap:10px;
+  padding:14px 18px;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  box-shadow: var(--glow-outer);
+}
+.title-wrap h1{ margin:0; font-size: clamp(28px, 4vw, 40px) }
+.subtitle{ margin:10px 2px 0; color:var(--muted) }
+
+/* Roadmap */
+.roadmap{ position:relative; max-width:var(--maxw); margin:40px auto 120px; padding:0 20px }
+.track{
+  position:absolute; left:32px; top:0; bottom:0; width:4px;
+  background: repeating-linear-gradient(to bottom, #2a2f3a, #2a2f3a 12px, transparent 12px, transparent 24px);
+  border-radius:4px; filter: drop-shadow(0 0 10px rgba(255,255,255,.1)); overflow:hidden;
+}
+.track-glow{
+  position:absolute; left:0; top:0; width:100%; height:0%;
+  background: linear-gradient(180deg, rgba(255,255,255,.75), rgba(255,255,255,.18));
+  box-shadow: 0 0 24px rgba(255,255,255,.65);
+  mix-blend-mode:screen;
+}
+
+.stage{ position:relative; margin-left:80px; margin-bottom:44px }
+.badge{
+  position:absolute; left:-64px; top:14px; width:48px; height:48px;
+  border-radius:999px; background: linear-gradient(180deg, #1b1f27, #12151b);
+  border:1px solid rgba(255,255,255,.12); display:grid; place-items:center; font-weight:700;
+  box-shadow: var(--glow-outer);
+}
+.card{
+  background: radial-gradient(200px 160px at 20% 0%, rgba(255,255,255,.08), transparent 60%), #16181d;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 14px; padding: 18px 18px 16px; position:relative; overflow:hidden;
+}
+.card::before{ content:""; position:absolute; inset:-1px; border-radius:inherit; pointer-events:none;
+  box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 0 38px rgba(255,255,255,.18) inset }
+.glow{ box-shadow: var(--glow-outer) }
+.card-head{ display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:8px }
+.card-head h2{ margin:0; font-size: clamp(18px, 2.6vw, 24px) }
+.card-icon{ flex:0 0 auto; display:grid; place-items:center; padding:8px; border-radius:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.1); box-shadow: var(--glow-outer) }
+.bullets{ margin:8px 0 0 0; padding:0 0 0 18px }
+.bullets li{ margin:6px 0 }
+
+.footer{ text-align:center; margin:64px 0 24px; color:var(--muted) }
+.footer a{ color:var(--accent) }
+
+/* Reveal */
+.reveal{ opacity:0; transform: translateY(24px) scale(.98); filter: blur(2px);
+  transition: opacity .7s ease, transform .7s ease, filter .7s ease }
+.reveal.visible{ opacity:1; transform: translateY(0) scale(1); filter: blur(0) }
+.card:hover{ transform: translateY(-2px); transition: transform .25s ease }
+.card:hover::before{ box-shadow: 0 0 0 1px rgba(255,255,255,.12) inset, 0 0 44px rgba(255,255,255,.22) inset }
+
+/* Responsive */
+@media (max-width:700px){
+  .track{ left:24px }
+  .stage{ margin-left:72px }
+  .badge{ left:-56px; width:42px; height:42px }
+}
+
+/* Light theme (SOFT) — off-white background, soft shadows, darker text */
+body.light{
+  --bg:#f5f7fb;
+  --panel:#ffffff;
+  --text:#0e1116;
+  --muted:#4a5668;
+  --line:#d7dbe3;
+  --accent:#1a2b59;
+}
+body.light .title-wrap,
+body.light .card,
+body.light .floating-btn{
+  border-color: rgba(0,0,0,.08);
+  background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.0));
+  box-shadow: 0 0 24px rgba(0,0,0,.06);
+}
+body.light .card::before{
+  box-shadow: 0 0 0 1px rgba(0,0,0,.05) inset, 0 0 32px rgba(0,0,0,.06) inset;
+}
+body.light .track{
+  background: repeating-linear-gradient(to bottom, #cfd6e2, #cfd6e2 12px, transparent 12px, transparent 24px);
+}
+body.light .track-glow{
+  background: linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.06));
+  box-shadow: 0 0 20px rgba(0,0,0,.15);
+  mix-blend-mode: multiply;
+}
+
+/* --- Extra scroll effects --- */
+.reveal{ opacity:0; transform: translateY(24px) scale(.98); filter: blur(2px);
+  transition: opacity .8s cubic-bezier(.22,.61,.36,1), transform .8s cubic-bezier(.22,.61,.36,1), filter .8s }
+.reveal.visible{ opacity:1; transform: none; filter: none }
+.fx-left{ transform: translateX(-28px) scale(.98) }
+.fx-right{ transform: translateX(28px) scale(.98) }
+.fx-tilt{ transform: perspective(600px) rotateX(6deg) translateY(18px) scale(.98); transform-origin: 50% 0 }
+.fx-up{ transform: translateY(28px) scale(.98) }
+.reveal.visible.fx-tilt{ transform: none }
+
+/* Pulse the card glow when fully revealed */
+.reveal.visible .card::before{
+  animation: glowPulse 1.6s ease-out 1;
+}
+@keyframes glowPulse{
+  0%{ box-shadow: 0 0 0 1px rgba(255,255,255,.06) inset, 0 0 10px rgba(255,255,255,.12) inset }
+  60%{ box-shadow: 0 0 0 1px rgba(255,255,255,.14) inset, 0 0 44px rgba(255,255,255,.24) inset }
+  100%{ box-shadow: 0 0 0 1px rgba(255,255,255,.08) inset, 0 0 32px rgba(255,255,255,.18) inset }
+}
+
+/* Smoother fill for the vertical track */
+.track-glow{ transition: height .35s ease }
+
+/* Expand button and panel */
+.expand-btn{
+  margin-top:12px;
+  padding:8px 12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+  color:var(--text);
+  cursor:pointer;
+  transition: transform .15s ease, box-shadow .2s ease, background .2s ease;
+}
+.expand-btn:hover{ transform: translateY(-1px); box-shadow: 0 6px 24px rgba(0,0,0,.3) }
+.expand-btn[aria-expanded="true"]{ outline:2px solid rgba(255,255,255,.35) }
+
+.expand-panel{
+  margin-top:10px;
+  border-top:1px dashed rgba(255,255,255,.15);
+  overflow:hidden;
+  max-height:0;
+  opacity:0;
+  filter: blur(4px);
+  transform: translateY(8px) scale(.98);
+  transition: max-height .45s ease, opacity .35s ease, filter .35s ease, transform .35s ease;
+  will-change: max-height, opacity, transform;
+  padding-top:0;
+}
+.expand-panel.open{
+  opacity:1;
+  filter:none;
+  transform: none;
+  padding-top:10px;
+}
+
+/* Badge text contrast for light mode */
+.badge{ color: #eaeefb; }
+body.light .badge{
+  background: linear-gradient(180deg, #eef2f8, #e7ebf4);
+  color:#0e1116;
+  border-color: rgba(0,0,0,.12);
+  box-shadow: 0 0 18px rgba(0,0,0,.06);
+}
+
+/* Visual build loop */
+.loop{ margin-top:12px; background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+  border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:10px 12px; }
+body.light .loop{ background: linear-gradient(180deg, rgba(0,0,0,.02), rgba(0,0,0,.00)); border-color: rgba(0,0,0,.08) }
+.loop-header{ font-weight:700; letter-spacing:.3px; margin-bottom:6px; opacity:.9 }
+.loop-steps{ list-style:none; margin:0; padding:0; display:grid; gap:8px }
+.loop-step{ display:flex; align-items:center; gap:10px; padding:8px 10px; border-radius:10px;
+  background: rgba(255,255,255,.02); border:1px solid rgba(255,255,255,.06); position:relative; }
+body.light .loop-step{ background: rgba(0,0,0,.02); border-color: rgba(0,0,0,.06) }
+.loop-step .dot{ width:10px; height:10px; border-radius:999px; background:#8d93a8; box-shadow:none; flex:0 0 auto }
+.loop-step.active{ box-shadow: 0 0 24px rgba(255,255,255,.18), inset 0 0 22px rgba(255,255,255,.12) }
+.loop-step.active .dot{ background:#ffffff; box-shadow: 0 0 16px rgba(255,255,255,.9) }
+.loop-step .txt{ flex:1 }
